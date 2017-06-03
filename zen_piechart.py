@@ -97,9 +97,9 @@ def parsePools(soup, outPoolList):
 #---------------------------------------
 
 def getHashrate(soup):
-	hashtags = soup.findAll(text=re.compile('NET hash'), limit=1)
+	hashtags = soup.findAll(text=re.compile('Network Hash:'), limit=1)
 	if len(hashtags) > 0:
-		hashtxt = str(hashtags[0].encode('utf-8'))[16:]
+		hashtxt = str(hashtags[0].encode('utf-8'))[17:]
 		hashfloat = hashtxtToFloat(hashtxt)
 		return hashfloat
 	return 0.0
