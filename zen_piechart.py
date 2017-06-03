@@ -57,7 +57,10 @@ class NetInfos:
 
 def hashtxtToFloat(hashtxt):
 	spaceIdx = hashtxt.index(' ')
-	hash = float(hashtxt[:spaceIdx])
+	try:
+		hash = float(hashtxt[:spaceIdx])
+	except ValueError:
+		hash = 0.0
 	if hashtxt[spaceIdx+1:][0] == 'K':
 		hash /= 1000.0
 	return hash
@@ -148,8 +151,10 @@ def writeHtml(htmlText):
 # MAIN
 
 s = sched.scheduler(time.time, time.sleep)
+netInfos = NetInfos()
+
 def updatePools(sc): 
-	netInfos = NetInfos()
+	netInfos.poolList = []
 	if getPoolsAndHashrate(netInfos) and len(netInfos.poolList) > 0:
 		print("Found", len(netInfos.poolList), "pools!")
 		htmlText = createHtml(netInfos.poolList)
