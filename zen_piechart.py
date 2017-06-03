@@ -4,7 +4,7 @@ import sched, time
 
 url = "http://zenpools.miningspeed.com/"
 
-update_time = 20
+update_time = 60
 
 out_file = "/var/www/html/index.html"
 
