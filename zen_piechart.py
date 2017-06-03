@@ -39,6 +39,7 @@ html_footer = """
   </head>
   <body>
     <div id="piechart" style="width: 900px; height: 500px;"></div>
+    <p>Data retrieved from  <a href="http://zenpools.miningspeed.com">Miningspeed</a>
   </body>
 </html>
 """
