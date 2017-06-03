@@ -98,9 +98,21 @@ def getHashrate(soup):
 	if len(hashtags) > 0:
 		hashtxt = str(hashtags[0].encode('utf-8'))[16:]
 		hashfloat = hashtxtToFloat(hashtxt)
-		print(hashfloat)
 		return hashfloat
 	return 0.0
+
+#---------------------------------------
+
+def insertUnknownPools(outNetInfos):
+	othPool = Pool()
+	othPool.name = "Unknown"
+	totalPoolsHashrate = 0.0
+	for pool in outNetInfos.poolList:
+		totalPoolsHashrate += pool.hashrate
+	othPool.hashrate = outNetInfos.hashrate - totalPoolsHashrate
+	if othPool.hashrate < 0.0:
+		othPool.hashrate = 0.0
+	outNetInfos.poolList.append(othPool)	
 
 #---------------------------------------
 
@@ -108,8 +120,11 @@ def getPoolsAndHashrate(outNetInfos):
 	with urllib.request.urlopen(url) as response:
 		soup = BeautifulSoup(response.read(), "html.parser", from_encoding="utf-8")
 		outNetInfos.hashrate = getHashrate(soup)
-		return parsePools(soup, outNetInfos.poolList)
-	print("ERROR: getPools !")
+		if parsePools(soup, outNetInfos.poolList) == False:
+			return False
+		insertUnknownPools(outNetInfos)
+		return True	
+	print("ERROR: cannot open url !")
 	return False
 
 #---------------------------------------
