@@ -1,3 +1,8 @@
+chart.log
+chart_pid.txt
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

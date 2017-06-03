@@ -27,7 +27,7 @@ html_footer = """
         ]);
 
         var options = {
-          title: 'Zencash network hashrate : 3.07 MSol/s'
+          title: 'TITLE'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
