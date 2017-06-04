@@ -57,11 +57,12 @@ class NetInfos:
 #---------------------------------------
 
 def hashtxtToFloat(hashtxt):
-	spaceIdx = hashtxt.index(' ')
 	try:
+		spaceIdx = hashtxt.index(' ')
 		hash = float(hashtxt[:spaceIdx])
-	except ValueError:
-		hash = 0.0
+	except ValueError as e:
+		print(str(e))
+		return 0.0
 	if hashtxt[spaceIdx+1:][0] == 'K':
 		hash /= 1000.0
 	return hash
